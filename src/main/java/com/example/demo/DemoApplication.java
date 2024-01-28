@@ -12,9 +12,9 @@ import org.springframework.context.annotation.Bean;
 
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Unmarshaller;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 @SpringBootApplication
 @EnableEncryptableProperties
