@@ -96,7 +96,7 @@ public class FolderMonitorService {
     private  void startMonitoring() throws URISyntaxException {
         try {
             watchService = FileSystems.getDefault().newWatchService();
-            Path path = Path.of(folderPath);
+            Path path = Path.of(""+folderPath);
             path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE);
             while (true) {
                 WatchKey key;
