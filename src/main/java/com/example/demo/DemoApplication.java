@@ -6,14 +6,24 @@ import java.util.concurrent.Executors;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 
 @SpringBootApplication
-public class DemoApplication {
+@EnableEncryptableProperties
+public class DemoApplication extends SpringBootServletInitializer {
+	
+	@Override
+	  protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+	      return builder.sources(DemoApplication.class);
+	  }
 
 	public static void main(String[] args) {	
 		
