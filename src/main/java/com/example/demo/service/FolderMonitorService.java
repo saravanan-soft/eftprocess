@@ -23,9 +23,11 @@ import com.example.demo.XmlFileClass.Sender;
 import com.example.demo.XmlFileClass.fileStatus;
 import com.example.demo.util.panaceaFileutils;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -94,8 +96,6 @@ public class FolderMonitorService {
  
     private  void startMonitoring() throws URISyntaxException {
         try {
-        	
-        	
             watchService = FileSystems.getDefault().newWatchService();
             Path path = Path.of(folderPath);
             path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE);
@@ -142,7 +142,7 @@ public class FolderMonitorService {
          }
     }
     
-    @javax.annotation.PreDestroy
+    @PreDestroy
     public void cleanup() {
         try {
             // Stop the watch service
