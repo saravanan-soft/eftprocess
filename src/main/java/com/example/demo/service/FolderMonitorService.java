@@ -52,7 +52,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
-public class FolderMonitorService {
+public class FolderMonitorService implements MonitorService {
 	
 	 private static final Logger logger = LoggerFactory.getLogger(FolderMonitorService.class);
 
