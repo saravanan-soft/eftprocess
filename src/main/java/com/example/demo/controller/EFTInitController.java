@@ -23,24 +23,25 @@ import com.example.demo.service.MonitorService;
 @RequestMapping("/api/v1")
 public class EFTInitController {
 	
-	//private FolderMonitorService folderMonitorService;
 	
-	private MonitorService folderMonitorService;
-	public EFTInitController(MonitorService folderMonitorService)
+	
+	
+	private MonitorService Service;
+	public EFTInitController(@Qualifier("folderservice") MonitorService Service)
 	{
-		this.folderMonitorService=folderMonitorService;
+		this.Service=Service;
 	}
 	
 	
 	@GetMapping("/start")
 	public ResponseEntity<String> startProcess(){
-		this.folderMonitorService.startWatch();
+		this.Service.startWatch();
 		 return new ResponseEntity<>("Watch service has been started", HttpStatus.OK);
 	}
 	
 	@GetMapping("/stop")
 	public ResponseEntity<String> stopProcess(){
-		this.folderMonitorService.stopMonitor();
+		this.Service.stopMonitor();
 		 return new ResponseEntity<>("Watch service has been stopped", HttpStatus.OK);
 	}
 	
