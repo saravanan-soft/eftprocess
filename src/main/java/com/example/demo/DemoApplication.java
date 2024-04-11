@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
@@ -18,6 +19,7 @@ import jakarta.xml.bind.Unmarshaller;
 
 @SpringBootApplication
 @EnableEncryptableProperties
+@EnableDiscoveryClient
 public class DemoApplication extends SpringBootServletInitializer {
 	
 	@Override

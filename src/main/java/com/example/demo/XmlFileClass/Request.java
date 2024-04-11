@@ -2,7 +2,13 @@ package com.example.demo.XmlFileClass;
 
 import jakarta.persistence.Entity;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import org.apache.kafka.common.serialization.Serializer;
 
 import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.XmlAccessType;
@@ -106,6 +112,14 @@ public class Request {
 	public void setTransactionInfo(TransactionInfo transactionInfo) {
 		this.transactionInfo = transactionInfo;
 	}
+
+	
+	
+
+	
+		
+		
+	
 
 	
 }

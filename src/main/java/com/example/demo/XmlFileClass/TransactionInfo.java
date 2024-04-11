@@ -1,5 +1,6 @@
 package com.example.demo.XmlFileClass;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
@@ -18,7 +19,7 @@ public class TransactionInfo  {
 	
 	
 	
-    private int amount;
+    private double amount;
     private String currency;
     private String valueDate;
     private String initiatedBy;
@@ -26,10 +27,10 @@ public class TransactionInfo  {
     private String checkedBy;
     private String checkedOn;
     @XmlElement(name = "Amount",namespace="http://www.progressoft.com/EFTRequest")
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
-	public void setAmount(int amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 	@XmlElement(name = "Currency",namespace="http://www.progressoft.com/EFTRequest")

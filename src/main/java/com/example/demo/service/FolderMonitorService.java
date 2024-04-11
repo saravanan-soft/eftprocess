@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Dao.FileStatusRep;
@@ -22,6 +23,7 @@ import com.example.demo.XmlFileClass.MessageInfo;
 import com.example.demo.XmlFileClass.Request;
 import com.example.demo.XmlFileClass.Sender;
 import com.example.demo.XmlFileClass.fileStatus;
+import com.example.demo.config.KafkaProducerConfig;
 import com.example.demo.util.panaceaFileutils;
 
 import jakarta.annotation.PostConstruct;
@@ -52,9 +54,10 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Service
-@Qualifier("folderservice")
+@Service("folderservice")
 public class FolderMonitorService implements MonitorService {
+	
+	
 	
 	 private static final Logger logger = LoggerFactory.getLogger(FolderMonitorService.class);
 
@@ -70,9 +73,10 @@ public class FolderMonitorService implements MonitorService {
     private FileStatusRep fileStatusRep;
     private  ExecutorService executorService;
     String data;
+    private KafkaProducerConfig kafkaProducerConfig;
     
     
-    public FolderMonitorService(MessageInfoRep msgInfoRep,ReceiverRep receiveRep,SenderRep senderRep,TransactionInfoRep tranInfoRep,RequestRep ReqRep,TransactionReferenceRep tranRefRep,ExecutorService executorService,FileStatusRep fileStatusRep)
+    public FolderMonitorService(MessageInfoRep msgInfoRep,ReceiverRep receiveRep,SenderRep senderRep,TransactionInfoRep tranInfoRep,RequestRep ReqRep,TransactionReferenceRep tranRefRep,ExecutorService executorService,FileStatusRep fileStatusRep,KafkaProducerConfig kafkaProducerConfig)
     {
     	this.msgInfoRep=msgInfoRep;
     	this.receiveRep=receiveRep;
@@ -82,6 +86,7 @@ public class FolderMonitorService implements MonitorService {
     	this.tranRefRep=tranRefRep;
     	this.executorService=executorService;
     	this.fileStatusRep=fileStatusRep;
+    	this.kafkaProducerConfig=kafkaProducerConfig;
     }
      
     
@@ -189,6 +194,7 @@ public class FolderMonitorService implements MonitorService {
 				tranInfoRep.save(eftRequest.getTransactionInfo());
 				tranRefRep.save(eftRequest.getTransactionReference());
 				ReqRep.save(eftRequest);
+				this.kafkaProducerConfig.sendMessage(eftRequest);
 				fs.setStage(4);
 				logger.info(fileName+" stage 4 completed");
 				fs.setStatus('S');
